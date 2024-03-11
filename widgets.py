@@ -35,7 +35,8 @@ class MainWindow(QMainWindow):
     def init_labels(self):
         for i in range(2):
             self.labels.append(QLabel('0', self))
-            self.labels[i].setGeometry(500, MARGIN_TOP_BGROUP + (i * MARGIN_K_BUTTON + 50), BUTTON_WSIZE, BUTTON_HSIZE)
+            self.labels[i].setGeometry(MARGIN_LEFT_LGROUP, MARGIN_TOP_LGROUP + (i * MARGIN_K_LABEL),
+                                       LABEL_WSIZE, LABEL_HSIZE)
 
     def button_clicked(self):
         self.ports.change_port_value(self.buttons.index(self.sender()), self.sender(), self.labels)
