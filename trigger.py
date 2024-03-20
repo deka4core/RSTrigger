@@ -6,7 +6,7 @@ class Ports:
         self.reset = False
         self.set = False
         self.clock = False
-        self.quit = False
+        self.quit = True
 
     def get_reset_value(self) -> int:
         return int(self.reset)
@@ -20,16 +20,16 @@ class Ports:
     def get_quit_value(self) -> int:
         return int(self.quit)
 
-    def change_port_value(self, port_index: int, button: QPushButton, labels: list) -> None:
+    def get_values(self) -> list:
+        return list(map(int, [self.set, self.clock, self.reset, self.quit]))
+
+    def change_port_value(self, port_index: int, labels: list) -> None:
         if port_index == 0:
             self.set = not self.set
-            button.setText(str(self.get_set_value()))
         elif port_index == 1:
             self.clock = not self.clock
-            button.setText(str(self.get_clock_value()))
         else:
             self.reset = not self.reset
-            button.setText(str(self.get_reset_value()))
         self.calculate(labels)
 
     def calculate(self, labels: list) -> None:
@@ -42,8 +42,14 @@ class Ports:
 
     def update_labels_text(self, labels: list) -> None:
         labels[0].setText(str(self.get_quit_value()))
+        labels[0].setStyleSheet(f"background-image:url(./media/label_q_{int(self.get_quit_value())}.png);"
+                                "font-size:30px;font-family:'Marske'; color:#0bbaea;")
         labels[1].setText(str(int(not self.get_quit_value())))
+        labels[1].setStyleSheet(f"background-image: url(./media/label_q_{int(not self.get_quit_value())}.png);"
+                                "font-size:30px;font-family:'Marske';color:#0bbaea;")
 
     def exception(self, labels: list):
-        labels[0].setText("Error")
-        labels[1].setText("Error")
+        for i in range(2):
+            labels[i].setStyleSheet("background-image: url(./media/label_q_e.png);"
+                                    "font-size:30px;font-family:'Marske'; color:#0bbaea;")
+            labels[i].setText("E")

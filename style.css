@@ -1,0 +1,5 @@
+QMainWindow {
+background-image: url(./media/rs0001.png)};
+@font-face {
+    font-family: 'Marske';
+    src: url("media/Marske.otf");};
